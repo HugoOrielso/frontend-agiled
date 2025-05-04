@@ -2,6 +2,7 @@ import { Label } from "@radix-ui/react-label"
 import { Textarea } from "./ui/textarea"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
+import { toast } from "sonner"
 
 const ContactForm = () => {
 
@@ -21,10 +22,13 @@ const ContactForm = () => {
 
     const result = await res.json()
     if (res.ok) {
-      alert("Contact submitted successfully")
+      toast.success("Contact submitted successfully")
     } else {
-      alert("Submission failed: " + (result?.error || "unknown error"))
+      toast.error("Submission failed: " + (result?.error || "unknown error"))
     }
+
+    
+
   }
 
   return (
