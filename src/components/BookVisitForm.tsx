@@ -4,13 +4,12 @@ import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { toast } from "sonner"
 
-const ContactForm = () => {
+const BookVisitForm = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     const data = Object.fromEntries(new FormData(event.currentTarget)) 
-    console.log(data);
     
     const res = await fetch("https://backend-agiled.vercel.app/api/create-contact", {
       method: "POST",
@@ -21,8 +20,11 @@ const ContactForm = () => {
     })
 
     const result = await res.json()
+
+    console.log(result);
+    
     if (res.ok) {
-      toast.success("Contact submitted successfully")
+      toast.success("We will contact you soon")
     } else {
       toast.error("Submission failed: " + (result?.error || "unknown error"))
     }
@@ -32,11 +34,7 @@ const ContactForm = () => {
   }
 
   return (
-    <div className='w-full  min-h-[900px] flex flex-col items-center justify-start border rounded-md'>
-      <p className="mb-6">
-        If none of the above suits you, please fill out our form below and we'll get back to you as soon as possible:
-      </p>
-
+    <div className='w-full flex flex-col items-center justify-start border rounded-md'>
       <form className="space-y-6 w-full p-3" onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2 flex flex-col items-start">
@@ -68,6 +66,10 @@ const ContactForm = () => {
             <Label htmlFor="address">Address</Label>
             <Input id="address" name="address" placeholder="Enter text" />
           </div>
+
+          <div className="space-y-2 flex-col items-start hidden">
+            <Input id="tags" name="tags" value={"[Book A Visit]"}  />
+          </div>
         </div>
 
         <div className="space-y-2 flex-col items-start flex">
@@ -75,7 +77,7 @@ const ContactForm = () => {
           <Textarea id="notes" name="notes" className="min-h-[120px]" />
         </div>
 
-        <Button type="submit" className="bg-gray-800 w-full cursor-pointer hover:bg-gray-700">
+        <Button type="submit" className="bg-[#C10000] w-full cursor-pointer">
           Submit
         </Button>
       </form>
@@ -83,4 +85,4 @@ const ContactForm = () => {
   )
 }
 
-export default ContactForm
+export default BookVisitForm

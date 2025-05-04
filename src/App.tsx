@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import './App.css'
 import { Label } from "@/components/ui/label"
-import ContactForm from './components/ContactForm'
 import { Toaster } from 'sonner'
+import BookVisitForm from './components/BookVisitForm'
+import DefaultForm from './components/DefaultForm'
 
 function App() {
   const [selectedOption, setSelectedOption] = useState<string | null>(null)
@@ -46,7 +47,7 @@ function App() {
       </section>
 
       <section className='flex flex-col w-full h-full flex-1 items-center justify-center'>
-        <div className={`p-4 border rounded-md bg-blue-50 mb-8 ${selectedOption === "call-now" ? "block" : "hidden"}`}>
+        <div className={`p-4 border rounded-md w-full max-w-[500px] bg-red-50 mb-8 ${selectedOption === "call-now" ? "block" : "hidden"}`}>
           <p className="font-medium w-full h-full flex items-center justify-center">
             Call us now at:{" "}
             <a href="tel:(+1)7802889476" className="text-blue-600 underline">(+1)780 288 9476</a>
@@ -56,7 +57,7 @@ function App() {
         <div className="mb-8 relative space-y-8 w-full">
           <div className={`${selectedOption === 'call-schedule' ? 'block' : 'hidden'}`}>
             <iframe
-              src="https://tidycal.com/andreamarciales/15-min-meet"
+              src="https://tidycal.com/iinfo/15-minute-call"
               className="w-full min-h-[900px] flex items-center justify-center border rounded-md"
               frameBorder="0"
               allowFullScreen
@@ -65,22 +66,16 @@ function App() {
           </div>
 
           <div className={`${selectedOption === 'visit' ? 'block' : 'hidden'} overflow-hidden`} >
-            <iframe
-              src="https://crm.siscomtec.ca/forms-new/113924-iXSAer6BqtjTJ9GkVdpG"
-              className="w-full min-h-[900px] flex items-center justify-center border rounded-md"
-              frameBorder="0"
-              allowFullScreen
-              title="Book a visit"
-            ></iframe>
+            <BookVisitForm />
           </div>
         </div>
 
         {(selectedOption === "contact-form") && (
-          <ContactForm />
+            <DefaultForm/>
         )}
 
         {(!selectedOption) && (
-          <div className='w-full h-full  items-center justify-center p-4 border rounded-md bg-blue-50 mb-8 block '>
+          <div className='w-full h-full  items-center justify-center p-4 border rounded-md max-w-[500px] bg-red-50 mb-8 block '>
             <p>Please select an option</p>
           </div>
         )}
