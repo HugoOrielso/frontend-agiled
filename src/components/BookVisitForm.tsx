@@ -10,7 +10,6 @@ const BookVisitForm = () => {
     event.preventDefault()
 
     const data = Object.fromEntries(new FormData(event.currentTarget)) 
-    
     const res = await fetch("https://backend-agiled.vercel.app/api/create-contact", {
       method: "POST",
       headers: {
@@ -73,8 +72,8 @@ const BookVisitForm = () => {
         </div>
 
         <div className="space-y-2 flex-col items-start flex">
-          <Label htmlFor="notes">Additional notes</Label>
-          <Textarea id="notes" name="notes" className="min-h-[120px]" />
+          <Label htmlFor="note">Additional notes</Label>
+          <Textarea id="note" name="note" className="min-h-[120px]" />
         </div>
 
         <Button type="submit" className="bg-[#C10000] w-full cursor-pointer">
