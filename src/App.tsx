@@ -45,7 +45,6 @@ function App() {
         </div>
       </section>
 
-      {/* Call now info */}
       <section className='flex flex-col w-full h-full flex-1 items-center justify-center'>
         <div className={`p-4 border rounded-md bg-blue-50 mb-8 ${selectedOption === "call-now" ? "block" : "hidden"}`}>
           <p className="font-medium w-full h-full flex items-center justify-center">
@@ -54,7 +53,6 @@ function App() {
           </p>
         </div>
 
-        {/* Iframes (always mounted, toggled by class) */}
         <div className="mb-8 relative space-y-8 w-full">
           <div className={`${selectedOption === 'call-schedule' ? 'block' : 'hidden'}`}>
             <iframe
@@ -66,7 +64,7 @@ function App() {
             ></iframe>
           </div>
 
-          <div className={`${selectedOption === 'visit' ? 'block' : 'hidden'}`}>
+          <div className={`${selectedOption === 'visit' ? 'block' : 'hidden'} overflow-hidden`} >
             <iframe
               src="https://crm.siscomtec.ca/forms-new/113924-iXSAer6BqtjTJ9GkVdpG"
               className="w-full min-h-[900px] flex items-center justify-center border rounded-md"
@@ -77,20 +75,18 @@ function App() {
           </div>
         </div>
 
-        {/* Contact form - default or explicitly selected */}
         {(selectedOption === "contact-form") && (
           <ContactForm />
         )}
 
-        {/* Contact form - default or explicitly selected */}
         {(!selectedOption) && (
-          <div className='w-full h-full flex items-center justify-center '>
+          <div className='w-full h-full  items-center justify-center p-4 border rounded-md bg-blue-50 mb-8 block '>
             <p>Please select an option</p>
           </div>
         )}
 
       </section>
-      <Toaster richColors/>
+      <Toaster richColors />
     </div>
 
   )

@@ -11,7 +11,7 @@ const ContactForm = () => {
     const data = Object.fromEntries(new FormData(event.currentTarget)) 
     console.log(data);
     
-    const res = await fetch("http://localhost:3001/api/create-contact", {
+    const res = await fetch("https://backend-agiled.vercel.app/api/create-contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -28,12 +28,12 @@ const ContactForm = () => {
   }
 
   return (
-    <div className='w-full'>
+    <div className='w-full  min-h-[900px] flex flex-col items-center justify-start border rounded-md'>
       <p className="mb-6">
         If none of the above suits you, please fill out our form below and we'll get back to you as soon as possible:
       </p>
 
-      <form className="space-y-6" onSubmit={handleSubmit}>
+      <form className="space-y-6 w-full p-3" onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2 flex flex-col items-start">
             <Label htmlFor="first_name">First name</Label>
@@ -71,7 +71,7 @@ const ContactForm = () => {
           <Textarea id="notes" name="notes" className="min-h-[120px]" />
         </div>
 
-        <Button type="submit" className="bg-gray-800 hover:bg-gray-700">
+        <Button type="submit" className="bg-gray-800 w-full cursor-pointer hover:bg-gray-700">
           Submit
         </Button>
       </form>
