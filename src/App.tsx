@@ -24,10 +24,10 @@ function App() {
           <h2 className="text-lg font-semibold mb-4">RadioBox Group</h2>
           <div className="space-y-3">
             {[
-              { id: 'call-now', label: 'Book a call now! call us at (+1)780 288 9476' },
+              { id: 'call-now', label: 'Call now! Call us at (+1)780 288 9476' },
               { id: 'call-schedule', label: 'Book a call for mornings or evenings here 15 min call' },
               { id: 'visit', label: "Book a visit for mornings or evenings and we'll get back to you within 24 hours" },
-              { id: 'contact-form', label: 'Fill out our detailed contact form' },
+              { id: 'contact-form', label: 'Fill our detailed contact form to receive a quote' },
             ].map(({ id, label }) => (
               <div key={id} className="flex items-center space-x-2">
                 <input
@@ -41,7 +41,8 @@ function App() {
                 />
                 <Label htmlFor={id}>{label}</Label>
               </div>
-            ))}
+            ))
+            }
           </div>
         </div>
       </section>
@@ -57,7 +58,7 @@ function App() {
         <div className="mb-8 relative space-y-8 w-full">
           <div className={`${selectedOption === 'call-schedule' ? 'block' : 'hidden'}`}>
             <iframe
-              src="https://tidycal.com/iinfo/15-minute-call"
+              src="https://tidycal.com/morenostucco/15-minute-call"
               className="w-full min-h-[900px] flex items-center justify-center border rounded-md"
               frameBorder="0"
               allowFullScreen
@@ -71,7 +72,7 @@ function App() {
         </div>
 
         {(selectedOption === "contact-form") && (
-            <DefaultForm/>
+          <DefaultForm />
         )}
 
         {(!selectedOption) && (

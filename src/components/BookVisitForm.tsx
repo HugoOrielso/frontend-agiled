@@ -3,11 +3,14 @@ import { Textarea } from "./ui/textarea"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { toast } from "sonner"
+import { useState } from "react"
 
 const BookVisitForm = () => {
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    setLoading(true)
 
     const data = Object.fromEntries(new FormData(event.currentTarget)) 
     const res = await fetch("https://backend-agiled.vercel.app/api/create-contact", {
@@ -19,17 +22,14 @@ const BookVisitForm = () => {
     })
 
     const result = await res.json()
-
-    console.log(result);
     
     if (res.ok) {
+      setLoading(false)
       toast.success("We will contact you soon")
     } else {
+      setLoading(false)
       toast.error("Submission failed: " + (result?.error || "unknown error"))
     }
-
-    
-
   }
 
   return (
@@ -76,8 +76,8 @@ const BookVisitForm = () => {
           <Textarea id="note" name="note" className="min-h-[120px]" />
         </div>
 
-        <Button type="submit" className="bg-[#C10000] w-full cursor-pointer">
-          Submit
+        <Button type="submit" className={`bg-[#C10000] w-full ${loading ? 'pointer-events-none' :  'cursor-pointer'}`}>
+          {loading ? <span>Loading</span> : <span>Submit</span> }
         </Button>
       </form>
     </div>
