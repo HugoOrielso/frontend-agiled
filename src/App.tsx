@@ -48,9 +48,9 @@ function App() {
 
       <section className='flex flex-col w-full h-full flex-1 items-center justify-center'>
         <div className={`p-4 border rounded-md w-full max-w-[500px] bg-red-50 mb-8 ${selectedOption === "call-now" ? "block" : "hidden"}`}>
-          <p className="font-medium w-full h-full flex items-center justify-center">
+          <p className="font-medium w-full h-full flex items-center justify-center gap-2">
             Call us now at:{" "}
-            <a href="tel:(+1)7802889476" className="text-blue-600 underline">(+1)780 288 9476</a>
+            <a href="tel:+17802889476" className='underline'>(+1)780 288 9476</a>
           </p>
         </div>
 
