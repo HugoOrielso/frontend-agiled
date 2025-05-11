@@ -38,42 +38,42 @@ const BookVisitForm = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2 flex flex-col items-start">
             <Label htmlFor="first_name">First name</Label>
-            <Input id="first_name" name="first_name"  placeholder="Enter text" />
+            <Input id="first_name" name="first_name" required placeholder="Enter text" />
           </div>
 
           <div className="space-y-2 flex-col items-start flex">
             <Label htmlFor="last_name">Last name</Label>
-            <Input id="last_name" name="last_name" placeholder="Enter text" />
+            <Input id="last_name" name="last_name" required placeholder="Enter text" />
           </div>
 
           <div className="space-y-2 flex-col items-start flex">
             <Label htmlFor="email">Contact email</Label>
-            <Input id="email" name="email" type="email"  placeholder="Enter email" />
+            <Input id="email" name="email" type="email" required placeholder="Enter email" />
           </div>
 
           <div className="space-y-2 flex-col items-start flex">
             <Label htmlFor="phone">Phone number</Label>
-            <Input id="phone" name="phone" placeholder="phone number" />
+            <Input id="phone" name="phone" placeholder="phone number" required />
           </div>
 
           <div className="space-y-2 flex-col items-start flex">
             <Label htmlFor="project_scope">Project scope details</Label>
-            <Input id="project_scope" name="project_scope" placeholder="Enter text" />
+            <Input id="project_scope" name="project_scope" placeholder="Enter text" required/>
           </div>
 
           <div className="space-y-2 flex-col items-start flex">
             <Label htmlFor="address">Address</Label>
-            <Input id="address" name="address" placeholder="Enter text" />
+            <Input id="address" name="address" placeholder="Enter text" required/>
           </div>
 
           <div className="space-y-2 flex-col items-start hidden">
-            <Input id="tags" name="tags" value={"[Book A Visit]"}  />
+            <Input id="tags" name="tags" value={"[Book A Visit]"} required />
           </div>
         </div>
 
         <div className="space-y-2 flex-col items-start flex">
           <Label htmlFor="note">Additional notes</Label>
-          <Textarea id="note" name="note" className="min-h-[120px]" />
+          <Textarea id="note" name="note" className="min-h-[120px]" required />
         </div>
 
         <Button type="submit" className={`bg-[#C10000] w-full ${loading ? 'pointer-events-none' :  'cursor-pointer'}`}>
