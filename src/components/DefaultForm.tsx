@@ -91,8 +91,8 @@ const DefaultForm = () => {
         </div>
 
         <div className="space-y-2 flex-col items-start flex">
-          <Label htmlFor="notes">Additional notes</Label>
-          <Textarea id="notes" name="notes" className="min-h-[120px]" required />
+          <Label htmlFor="note">Additional notes</Label>
+          <Textarea id="note" name="note" className="min-h-[120px]" required />
         </div>
 
         <Button type="submit" className={`bg-[#C10000] w-full ${loading ? 'pointer-events-none' : 'cursor-pointer'}`} >
