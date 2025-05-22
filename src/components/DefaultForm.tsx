@@ -10,7 +10,7 @@ const DefaultForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setLoading(true)
-    const data = Object.fromEntries(new FormData(event.currentTarget)) 
+    const data = Object.fromEntries(new FormData(event.currentTarget))
 
     const res = await fetch("https://backend-agiled.vercel.app/api/create-contact", {
       method: "POST",
@@ -22,13 +22,29 @@ const DefaultForm = () => {
 
     const result = await res.json()
     if (res.ok) {
-      setLoading(false)
-      toast.success("Contact submitted successfully")
+      if (result?.errors) {
+        const firstErrorField = Object.keys(result.errors)[0];
+        const firstErrorMsg = result.errors[firstErrorField]?.[0];
+        toast.error("Error: " + (firstErrorMsg || result.message || "unknown error"));
+      } else {
+        toast.success("Contact submitted successfully");
+      }
     } else {
-      setLoading(false)
-      toast.error("Submission failed: " + (result?.error || "unknown error"))
+      let errorMessage = "Submission failed: ";
+
+      if (result?.errors) {
+        const firstErrorField = Object.keys(result.errors)[0];
+        const firstErrorMsg = result.errors[firstErrorField]?.[0];
+        errorMessage += firstErrorMsg || result.message || "unknown error";
+      } else {
+        errorMessage += result?.message || "unknown error";
+      }
+
+      toast.error(errorMessage);
     }
-    setLoading(false)
+
+    setLoading(false);
+
   }
 
   return (
@@ -41,22 +57,22 @@ const DefaultForm = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2 flex flex-col items-start">
             <Label htmlFor="first_name">First name</Label>
-            <Input id="first_name" name="first_name"  placeholder="Enter text" required/>
+            <Input id="first_name" name="first_name" placeholder="Enter text" required />
           </div>
 
           <div className="space-y-2 flex-col items-start flex">
             <Label htmlFor="last_name">Last name</Label>
-            <Input id="last_name" name="last_name" placeholder="Enter text" required/>
+            <Input id="last_name" name="last_name" placeholder="Enter text" required />
           </div>
 
           <div className="space-y-2 flex-col items-start flex">
             <Label htmlFor="email">Contact email</Label>
-            <Input id="email" name="email" type="email"  placeholder="Enter email" required/>
+            <Input id="email" name="email" type="email" placeholder="Enter email" required />
           </div>
 
           <div className="space-y-2 flex-col items-start flex">
             <Label htmlFor="phone">Phone number</Label>
-            <Input id="phone" name="phone" placeholder="phone number" required/>
+            <Input id="phone" name="phone" placeholder="phone number" required />
           </div>
 
           <div className="space-y-2 flex-col items-start flex">
@@ -79,8 +95,8 @@ const DefaultForm = () => {
           <Textarea id="notes" name="notes" className="min-h-[120px]" required />
         </div>
 
-        <Button type="submit" className={`bg-[#C10000] w-full ${loading ? 'pointer-events-none' :  'cursor-pointer'}`} >
-          {loading ? <span>Loading</span> : <span>Submit</span> }
+        <Button type="submit" className={`bg-[#C10000] w-full ${loading ? 'pointer-events-none' : 'cursor-pointer'}`} >
+          {loading ? <span>Loading</span> : <span>Submit</span>}
         </Button>
       </form>
     </div>

@@ -12,7 +12,7 @@ const BookVisitForm = () => {
     event.preventDefault()
     setLoading(true)
 
-    const data = Object.fromEntries(new FormData(event.currentTarget)) 
+    const data = Object.fromEntries(new FormData(event.currentTarget))
     const res = await fetch("https://backend-agiled.vercel.app/api/create-contact", {
       method: "POST",
       headers: {
@@ -22,14 +22,31 @@ const BookVisitForm = () => {
     })
 
     const result = await res.json()
-    
+
     if (res.ok) {
-      setLoading(false)
-      toast.success("We will contact you soon")
+      if (result?.errors) {
+        const firstErrorField = Object.keys(result.errors)[0];
+        const firstErrorMsg = result.errors[firstErrorField]?.[0];
+        toast.error("Error: " + (firstErrorMsg || result.message || "unknown error"));
+      } else {
+        toast.success("Contact submitted successfully");
+      }
     } else {
-      setLoading(false)
-      toast.error("Submission failed: " + (result?.error || "unknown error"))
+      let errorMessage = "Submission failed: ";
+
+      if (result?.errors) {
+        const firstErrorField = Object.keys(result.errors)[0];
+        const firstErrorMsg = result.errors[firstErrorField]?.[0];
+        errorMessage += firstErrorMsg || result.message || "unknown error";
+      } else {
+        errorMessage += result?.message || "unknown error";
+      }
+
+      toast.error(errorMessage);
     }
+
+    setLoading(false);
+
   }
 
   return (
@@ -58,12 +75,12 @@ const BookVisitForm = () => {
 
           <div className="space-y-2 flex-col items-start flex">
             <Label htmlFor="project_scope">Project scope details</Label>
-            <Input id="project_scope" name="project_scope" placeholder="Enter text" required/>
+            <Input id="project_scope" name="project_scope" placeholder="Enter text" required />
           </div>
 
           <div className="space-y-2 flex-col items-start flex">
             <Label htmlFor="address">Address</Label>
-            <Input id="address" name="address" placeholder="Enter text" required/>
+            <Input id="address" name="address" placeholder="Enter text" required />
           </div>
 
           <div className="space-y-2 flex-col items-start hidden">
@@ -76,8 +93,8 @@ const BookVisitForm = () => {
           <Textarea id="note" name="note" className="min-h-[120px]" required />
         </div>
 
-        <Button type="submit" className={`bg-[#C10000] w-full ${loading ? 'pointer-events-none' :  'cursor-pointer'}`}>
-          {loading ? <span>Loading</span> : <span>Submit</span> }
+        <Button type="submit" className={`bg-[#C10000] w-full ${loading ? 'pointer-events-none' : 'cursor-pointer'}`}>
+          {loading ? <span>Loading</span> : <span>Submit</span>}
         </Button>
       </form>
     </div>
